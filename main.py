@@ -35,4 +35,16 @@ def main():
     # Define a customized banner (string returned when client connects)
     handler.banner = "pyftpdlib based ftpd ready."
 
-    
+    # Instantiate FTP server class and listen on 0.0.0.0:2121
+    address = ('', 2121)
+    server = FTPServer(address, handler)
+
+    # set limit for connections
+    server.max_cons = 5
+    server.max_cons_per_ip = 2
+
+    # start ftp server
+    server.serve_forever()
+
+if __name__ == '__main__':
+    main()
